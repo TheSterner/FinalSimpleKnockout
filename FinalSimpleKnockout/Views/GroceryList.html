@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<script src="../Scripts/bootstrap.js"></script>
+	<script src="../Scripts/knockout-3.4.2.js"></script>
+	<script src="../Scripts/jquery-3.0.0.js"></script>
+	<script src="../Scripts/selectable.js"></script>
+	<script src="../Scripts/jquery-ui-1.12.1.js"></script>
+	<script src="../Scripts/myscripts.js"></script>
+	<link rel="stylesheet" href="../Content/bootstrap.css" />
+	<link rel="stylesheet" href="../Content/themes/base/main.css" />
+
+	<title></title>
+</head>
+<body>
+	<div class="jumbotron-fluid">
+		<h1 class="text-center">Grocery/To-do List</h1>
+		<div class="container-fluid alert alert-dark">
+			<form data-bind="submit:addItem">
+				Add item: <input type="text" data-bind='value:itemToAdd, valueUpdate: "afterkeydown"' />
+				<button class="btn btn-outline-success" type="submit" data-bind="enable: itemToAdd().length > 0">Add</button>
+			</form>
+			<div class="align-content-center">
+				<p class="text-center">Your values:</p>
+				</div>
+			<div class="text-center">
+				<select multiple="multiple" height="5" data-bind="options:allItems, selectedOptions:selectedItems"> </select>
+			</div>
+			<div class="text-center">
+				<button class="btn btn-outline-info" data-bind="click: removeSelected, enable: selectedItems().length > 0">Remove</button>
+				<button class="btn btn-outline-dark" data-bind="click: sortItems, enable: allItems().length > 1">Sort</button>
+			</div>
+
+		</div>
+	</div>
+	<script>
+		var BetterListModel = function () {
+			this.itemToAdd = ko.observable("");
+			this.allItems = ko.observableArray(["Orange Juice", "Butter", "Eggs", "Cheese"]); // Initial items
+			this.selectedItems = ko.observableArray(["Eggs"]);                                // Initial selection
+
+			this.addItem = function () {
+				if ((this.itemToAdd() !== "") && (this.allItems.indexOf(this.itemToAdd()) < 0)) // Prevent blanks and duplicates
+					this.allItems.push(this.itemToAdd());
+				this.itemToAdd(""); // Clear the text box
+			};
+
+			this.removeSelected = function () {
+				this.allItems.removeAll(this.selectedItems());
+				this.selectedItems([]); // Clear selection
+			};
+
+			this.sortItems = function () {
+				this.allItems.sort();
+			};
+		};
+
+		ko.applyBindings(new BetterListModel());
+	</script>
+	
+
+</body>
+
+
+</html>

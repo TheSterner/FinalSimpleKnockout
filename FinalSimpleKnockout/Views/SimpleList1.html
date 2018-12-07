@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<script src="../Scripts/bootstrap.js"></script>
+	<script src="../Scripts/knockout-3.4.2.js"></script>
+	<script src="../Scripts/jquery-3.0.0.js"></script>
+	<script src="../Scripts/selectable.js"></script>
+	<script src="../Scripts/jquery-ui-1.12.1.js"></script>
+	<script src="../Scripts/myscripts.js"></script>
+	<link rel="stylesheet" href="../Content/bootstrap.css" />
+
+
+	<title></title>
+</head>
+<body>
+	<div class="jumbotron">
+		<h1 class="text-center">What is your first name?</h1>
+	</div>
+	<div>
+		<h1 class="text-center" data-bind="text: fName">Your name</h1>
+	</div>
+	<div class="row">
+		<div class="col-5">
+		</div>
+
+		<div class="col-3">
+			<input id="textBox" type="text" data-bind="value: fName, valueUpdate: 'afterkeydown'" />
+			<button id="submit" class="btn btn-outline-danger" type="Submit" data-bind="click: addName">Submit</button>
+			<button id="clear" class="btn btn-outline-dark" type="button" data-bind="click: array.removeAll()">Clear All</button>
+		</div>
+		<div class="col-4">
+
+		</div>
+	</div>
+
+	<ul data-bind="foreach: array">
+		<li id="selectable" class="ui-widget-content" data-bind="text: $data"></li>
+	</ul>
+	<!--<script>
+		var firstName = {
+			fName: ko.observable(),
+			array: ko.observableArray(),
+			addName: function () {
+				this.array.push(this.fName())
+			}
+		};
+		firstName.fName(" ");
+		ko.applyBindings(firstName);
+	</script>
+	<script>
+		$(textBox).keyup(function (event) {
+			if (event.keyCode == 13) {
+				$(submit).click();
+			}
+		});
+	</script>
+	<script>
+		$(function () {
+			$("#selectable").selectable();
+		});
+	</script>-->
+	<script src="../Scripts/bootstrap.js"></script>
+	<script src="../Scripts/knockout-3.4.2.js"></script>
+	<script src="../Scripts/jquery-3.0.0.js"></script>
+	<script src="../Scripts/selectable.js"></script>
+	<script src="../Scripts/jquery-ui-1.12.1.js"></script>
+	<script src="../Scripts/myscripts.js"></script>
+</body>
+</html>
